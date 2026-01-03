@@ -12,73 +12,54 @@ body{
     font-family:'Amiri',serif;
     background:#f3f7f5;
     margin:0;
-    padding:0;
 }
-
 .container{
-    max-width:900px;
+    max-width:950px;
     margin:40px auto;
     background:#fff;
     padding:30px;
     border-radius:16px;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
 h1{
     text-align:center;
     color:#2f8f6b;
-    margin-bottom:5px;
 }
-
 .note{
     text-align:center;
     color:#777;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
-
-input{
+input,button{
     width:100%;
     padding:15px;
     font-size:18px;
     border-radius:10px;
-    border:1px solid #ccc;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
-
 button{
-    width:100%;
-    padding:15px;
-    font-size:18px;
     border:none;
-    border-radius:10px;
     background:#2f8f6b;
     color:#fff;
     cursor:pointer;
-    margin-bottom:10px;
 }
-
 button.share{
     background:#555;
 }
-
 .section{
-    margin-top:30px;
     display:none;
+    margin-top:30px;
 }
-
 .ayah{
     font-size:22px;
     line-height:2.4;
-    margin-bottom:25px;
-    color:#333;
+    margin-bottom:30px;
 }
-
-.surah-title{
+.title{
     color:#2f8f6b;
     font-weight:bold;
     margin-bottom:10px;
 }
-
 .dua{
     background:#f0faf6;
     padding:20px;
@@ -87,7 +68,25 @@ button.share{
     font-size:20px;
     margin-bottom:30px;
 }
-
+.azkar{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+.zikr{
+    background:#fafafa;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+}
+.zikr span{
+    display:block;
+    font-size:22px;
+    color:#2f8f6b;
+    margin-top:8px;
+}
 .footer{
     margin-top:30px;
     text-align:center;
@@ -103,15 +102,15 @@ button.share{
     <h1>صدقة جارية</h1>
     <p class="note">اكتب اسم المتوفّى وشارك الرابط ليقرأ الجميع له</p>
 
-    <input type="text" id="name" placeholder="اسم المتوفّى كاملًا">
-
+    <input id="name" placeholder="اسم المتوفّى كاملًا">
     <button onclick="start()">ابدأ القراءة</button>
     <button class="share" onclick="shareLink()">مشاركة الرابط بالاسم</button>
 
     <div class="section" id="content">
 
+        <!-- آيات -->
         <div class="ayah">
-            <div class="surah-title">سورة الفاتحة</div>
+            <div class="title">سورة الفاتحة</div>
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
             الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>
             الرَّحْمَٰنِ الرَّحِيمِ<br>
@@ -122,7 +121,7 @@ button.share{
         </div>
 
         <div class="ayah">
-            <div class="surah-title">آية الكرسي</div>
+            <div class="title">آية الكرسي</div>
             اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ
             لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ
             لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ
@@ -134,15 +133,19 @@ button.share{
             وَهُوَ الْعَلِيُّ الْعَظِيمُ
         </div>
 
-        <div class="ayah">
-            <div class="surah-title">سورة الإخلاص</div>
-            قُلْ هُوَ اللَّهُ أَحَدٌ<br>
-            اللَّهُ الصَّمَدُ<br>
-            لَمْ يَلِدْ وَلَمْ يُولَدْ<br>
-            وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
-        </div>
-
+        <!-- دعاء -->
         <div class="dua" id="dua"></div>
+
+        <!-- الأذكار -->
+        <div class="title">الأذكار (اضغط للعدّ)</div>
+        <div class="azkar">
+            <div class="zikr" onclick="count(this)">سبحان الله<span>0</span></div>
+            <div class="zikr" onclick="count(this)">الحمد لله<span>0</span></div>
+            <div class="zikr" onclick="count(this)">الله أكبر<span>0</span></div>
+            <div class="zikr" onclick="count(this)">لا إله إلا الله<span>0</span></div>
+            <div class="zikr" onclick="count(this)">أستغفر الله<span>0</span></div>
+            <div class="zikr" onclick="count(this)">اللهم صلِّ على محمد<span>0</span></div>
+        </div>
 
     </div>
 
@@ -155,11 +158,10 @@ button.share{
 function start(n=null){
     const input=document.getElementById("name");
     const name=n||input.value.trim();
-    if(!name){alert("من فضلك اكتب اسم المتوفّى");return;}
+    if(!name){alert("اكتب الاسم");return;}
 
     input.value=name;
     document.getElementById("content").style.display="block";
-
     document.getElementById("dua").innerHTML=
     `اللهم اغفر لـ <strong>${name}</strong>، وارحمه، وعافه، واعفُ عنه،
     وأكرم نزله، ووسّع مدخله، واغسله بالماء والثلج والبرد،
@@ -170,19 +172,14 @@ function start(n=null){
 function shareLink(){
     const name=document.getElementById("name").value.trim();
     if(!name){alert("اكتب الاسم الأول");return;}
-
     const url=location.origin+location.pathname+"?name="+encodeURIComponent(name);
+    navigator.share ? navigator.share({title:"صدقة جارية",url}) :
+    navigator.clipboard.writeText(url)&&alert("تم نسخ الرابط");
+}
 
-    if(navigator.share){
-        navigator.share({
-            title:"صدقة جارية",
-            text:"اقرأ القرآن واهدِ الأجر للمتوفّى",
-            url:url
-        });
-    }else{
-        navigator.clipboard.writeText(url);
-        alert("تم نسخ الرابط للمشاركة");
-    }
+function count(el){
+    const s=el.querySelector("span");
+    s.innerText=parseInt(s.innerText)+1;
 }
 
 const q=new URLSearchParams(location.search).get("name");
