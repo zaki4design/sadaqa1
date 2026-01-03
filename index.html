@@ -16,7 +16,7 @@ body{
 }
 
 .container{
-    max-width:850px;
+    max-width:900px;
     margin:40px auto;
     background:#fff;
     padding:30px;
@@ -27,7 +27,7 @@ body{
 h1{
     text-align:center;
     color:#2f8f6b;
-    margin-bottom:10px;
+    margin-bottom:5px;
 }
 
 .note{
@@ -68,9 +68,15 @@ button.share{
 
 .ayah{
     font-size:22px;
-    line-height:2.2;
-    margin-bottom:20px;
+    line-height:2.4;
+    margin-bottom:25px;
     color:#333;
+}
+
+.surah-title{
+    color:#2f8f6b;
+    font-weight:bold;
+    margin-bottom:10px;
 }
 
 .dua{
@@ -79,29 +85,7 @@ button.share{
     border-right:6px solid #2f8f6b;
     border-radius:10px;
     font-size:20px;
-    margin-bottom:25px;
-}
-
-.azkar{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.zikr{
-    background:#fafafa;
-    border-radius:12px;
-    padding:15px;
-    text-align:center;
-    border:1px solid #eee;
-    cursor:pointer;
-}
-
-.zikr span{
-    display:block;
-    font-size:22px;
-    color:#2f8f6b;
-    margin-top:8px;
+    margin-bottom:30px;
 }
 
 .footer{
@@ -127,23 +111,38 @@ button.share{
     <div class="section" id="content">
 
         <div class="ayah">
-            ﴿ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ﴾<br>
-            ﴿ كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ ﴾<br>
-            ﴿ رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ ﴾
+            <div class="surah-title">سورة الفاتحة</div>
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+            الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>
+            الرَّحْمَٰنِ الرَّحِيمِ<br>
+            مَالِكِ يَوْمِ الدِّينِ<br>
+            إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>
+            اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>
+            صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+        </div>
+
+        <div class="ayah">
+            <div class="surah-title">آية الكرسي</div>
+            اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ
+            لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ
+            لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ
+            مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ
+            يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ
+            وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ
+            وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ
+            وَلَا يَؤُودُهُ حِفْظُهُمَا ۚ
+            وَهُوَ الْعَلِيُّ الْعَظِيمُ
+        </div>
+
+        <div class="ayah">
+            <div class="surah-title">سورة الإخلاص</div>
+            قُلْ هُوَ اللَّهُ أَحَدٌ<br>
+            اللَّهُ الصَّمَدُ<br>
+            لَمْ يَلِدْ وَلَمْ يُولَدْ<br>
+            وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
         </div>
 
         <div class="dua" id="dua"></div>
-
-        <h3 style="color:#2f8f6b">الأذكار (اضغط للتسبيح)</h3>
-
-        <div class="azkar">
-            <div class="zikr" onclick="count(this)">سبحان الله<span>0</span></div>
-            <div class="zikr" onclick="count(this)">الحمد لله<span>0</span></div>
-            <div class="zikr" onclick="count(this)">الله أكبر<span>0</span></div>
-            <div class="zikr" onclick="count(this)">لا إله إلا الله<span>0</span></div>
-            <div class="zikr" onclick="count(this)">أستغفر الله<span>0</span></div>
-            <div class="zikr" onclick="count(this)">اللهم صلِّ على محمد<span>0</span></div>
-        </div>
 
     </div>
 
@@ -165,7 +164,6 @@ function start(n=null){
     `اللهم اغفر لـ <strong>${name}</strong>، وارحمه، وعافه، واعفُ عنه،
     وأكرم نزله، ووسّع مدخله، واغسله بالماء والثلج والبرد،
     ونقِّه من الخطايا كما نقيت الثوب الأبيض من الدنس،
-    وأبدله دارًا خيرًا من داره، وأهلاً خيرًا من أهله،
     وأدخله الجنة، وأعذه من عذاب القبر وعذاب النار.`;
 }
 
@@ -178,7 +176,7 @@ function shareLink(){
     if(navigator.share){
         navigator.share({
             title:"صدقة جارية",
-            text:"اقرأ القرآن واذكر الله واهدِ الأجر للمتوفّى",
+            text:"اقرأ القرآن واهدِ الأجر للمتوفّى",
             url:url
         });
     }else{
@@ -187,12 +185,6 @@ function shareLink(){
     }
 }
 
-function count(el){
-    const span=el.querySelector("span");
-    span.innerText=parseInt(span.innerText)+1;
-}
-
-// تحميل الاسم تلقائيًا من الرابط
 const q=new URLSearchParams(location.search).get("name");
 if(q) start(q);
 </script>
